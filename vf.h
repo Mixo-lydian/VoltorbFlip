@@ -6,15 +6,19 @@
 #define VF_H
 
 using std::vector;
+using std::string;
 
 class Card {
 public:
 	Card();
-	void print();
+	void print(int width);
 	int get_value() const;
+	bool get_flipped() const;
 private:
 	int value;
 	bool flipped;
+	bool flagged;
+	friend class GameBoard;
 };
 
 class Indicator {
@@ -25,16 +29,22 @@ public:
 private:
 	int value;
 	int voltorbs;
+	friend class GameBoard;
 };
 
 class GameBoard {
 public:
 	GameBoard();
-	void print();
 	Card board[5][5];
+	void print();
+	int interact(int row, int column, int type);
+	bool check_victory() const;
 private:
 	vector<Indicator> rowSums;
 	vector<Indicator> columnSums;
+	int unneededFlips;
+	int flippedCards;
+	bool victory;
 };
 
 #endif
