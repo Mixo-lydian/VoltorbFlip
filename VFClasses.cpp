@@ -69,7 +69,7 @@ GameBoard::GameBoard() {
 				counter++;
 				unneededFlips++;
 			}
-			if (board[i][j].get_value() == 1) unneededFlips++;
+			else if (board[i][j].get_value() == 1) unneededFlips++;
 			sum += board[i][j].get_value();
 		}
 		rowSums.push_back(Indicator(sum, counter));
@@ -85,14 +85,10 @@ GameBoard::GameBoard() {
 		}
 		columnSums.push_back(Indicator(sum, counter));
 	}
-	// Counting total # of Voltorbs
-	for (int i = 0; i < 5; i++) {
-		unneededFlips += rowSums[i].value;
-	}
 }
 
 void GameBoard::print() {
-	cout << "==||=====||=====||=====||=====||=====||=====||" << endl;
+	cout << unneededFlips << " " << flippedCards << endl << "==||=====||=====||=====||=====||=====||=====||" << endl;
 	for (int i = 0; i < 5; i++) {
 		int j = 0;
 		while (j < 6) {
@@ -128,15 +124,15 @@ int GameBoard::interact(int row, int column, int type = 0) {
 	case 1:
 		for (int i = 0; i < 5; i++) {
 			if (!board[row - 1][i].get_flipped()) result *= board[row - 1][i].get_value();
+			if ((board[row - 1][i].get_value() > 1) && !board[row - 1][i].get_flipped()) flippedCards++;
 			board[row - 1][i].flipped = true;
-			if (board[row - 1][i].get_value() > 1) flippedCards++;
 		}
 		break;
 	case 2:
 		for (int i = 0; i < 5; i++) {
 			if (!board[i][column - 1].get_flipped()) result *= board[i][column - 1].get_value();
+			if ((board[i][column - 1].get_value() > 1) && !board[i][column - 1].get_flipped()) flippedCards++;
 			board[i][column - 1].flipped = true;
-			if (board[i][column - 1].get_value() > 1) flippedCards++;
 		}
 		break;
 	case 3:
