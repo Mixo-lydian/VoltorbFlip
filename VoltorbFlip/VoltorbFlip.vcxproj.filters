@@ -13,5 +13,26 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Text Files">
+      <UniqueIdentifier>{1249d568-f407-42dc-9045-c45ebb7aa135}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\README.md">
+      <Filter>Text Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\vf.h">
+      <Filter>Text Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\VoltorbFlipMain.cpp">
+      <Filter>Text Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\VFClasses.cpp">
+      <Filter>Text Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
