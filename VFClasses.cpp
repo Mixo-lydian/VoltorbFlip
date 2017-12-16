@@ -148,3 +148,26 @@ int GameBoard::interact(int row, int column, int type = 0) {
 bool GameBoard::check_victory() const {
 	return victory;
 }
+
+Player::Player() {
+	coins = 0;
+	level = 1;
+}
+
+int Player::get_coins() const {
+	return coins;
+}
+
+int Player::get_level() const {
+	return level;
+}
+
+void Player::update_coins(int amount) {
+	coins += amount;
+	return;
+}
+
+void Player::level_up() {
+	level++;
+	return;
+}

@@ -14,15 +14,13 @@ using std::stringstream;
 using std::string;
 using std::system;
 
-int main() {
-	srand((int)time(0));
+void playGame(GameBoard &g, Player &p) {
 	int row = 1;
 	int column = 1;
 	int coins = 0;
 	int cardvalue = 0;
 	bool keepPlaying = true;
 	int typecheck = 0;
-	GameBoard g;
 	g.print();
 	while (keepPlaying) {
 		cout << "0 = Flip; 1 = Flip row; 2 = Flip column; 3 = Flag; 4+ = Quit" << endl << "Choose an option: ";
@@ -56,8 +54,26 @@ int main() {
 			}
 		}
 	}
+	p.update_coins(coins);
+	return;
+}
 
-	cout << "Final total: " << coins << endl;
+int main() {
+	srand((int)time(0));
+	Player p;
+	bool repeat = true;
+	int repeatCheck = 0;
+	while (repeat) {
+		GameBoard g;
+		playGame(g, p);
+		cout << "Would you like to play again? (0- = Yes, 1+ = No): ";
+		cin >> repeatCheck;
+		if (repeatCheck >= 1) repeat = false;
+		else system("CLS");
+		p.level_up();
+	}
+
+	cout << "Final total: " << p.get_coins() << endl;
 
 	return 0;
 }

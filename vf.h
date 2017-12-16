@@ -8,7 +8,12 @@
 using std::vector;
 using std::string;
 
-class Card {
+class Tile {
+public:
+	virtual void print(int width) = 0;
+};
+
+class Card : public Tile {
 public:
 	Card();
 	void print(int width);
@@ -21,7 +26,7 @@ private:
 	friend class GameBoard;
 };
 
-class Indicator {
+class Indicator : public Tile {
 public:
 	Indicator();
 	Indicator(int value, int voltorbs);
@@ -45,6 +50,18 @@ private:
 	int unneededFlips;
 	int flippedCards;
 	bool victory;
+};
+
+class Player {
+public:
+	Player();
+	int get_coins() const;
+	int get_level() const;
+	void update_coins(int amount);
+	void level_up();
+private:
+	int coins;
+	int level;
 };
 
 #endif
