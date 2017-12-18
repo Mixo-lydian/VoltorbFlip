@@ -21,3 +21,10 @@ Files in this repo:
 
 # Process
 
+I first began the project by creating the `GameBoard`, `Card`, and `Indicator` classes. The `GameBoard` is pretty self-explanatory; it holds a 5x5 grid of `Card`s and also has two vectors of `Indicator`s, and holds the game state; member functions in that class are responsible for printing the game board as well. But what are those classes?
+
+`Card`s hold an integer value from 0 to 3, which are randomly generated, and a boolean value that indicates whether or not it is flipped. Non-flipped cards, when printed, display a "?". Flipped cards will display their values. `Indicator`s hold two values: the total sum of the row or column it corresponds to, and the number of mines/"Voltorbs", or zeros, in that row or column.
+
+The first commit contains very rudimentary versions of these classes. The `GameBoard` can do nothing but `print()` itself, and cannot interact with the values of the `Card`s or `Indicator`s within them. The `Card`s have limited functionality as well, only being able to be flipped. This is a far cry from the functionality of the Voltorb Flip game, even if I had a working `print()` function.
+
+---
