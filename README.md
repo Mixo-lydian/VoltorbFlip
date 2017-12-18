@@ -44,7 +44,8 @@ In the next commit, I made several changes.
 
 However, I noticed that sometimes the game would not end properly; sometimes it would end too early, and sometimes it would never end even if I had flipped over all of the correct cards. This is because the game did not check to see if a card has already been flipped, which is problematic if a row and column flip intersect at a non-0/1 value, as it would count that card twice. This was easily fixed in the next commit:
 
-```for (int i = 0; i < 5; i++) {
+```
+for (int i = 0; i < 5; i++) {
   			if (!board[row - 1][i].get_flipped()) result *= board[row - 1][i].get_value();
  +			if ((board[row - 1][i].get_value() > 1) && !board[row - 1][i].get_flipped()) flippedCards++;
   			board[row - 1][i].flipped = true;
