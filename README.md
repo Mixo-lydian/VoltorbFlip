@@ -53,3 +53,5 @@ for (int i = 0; i < 5; i++) {
   		}
 ```
 and the same was done for columns, and the problem was fixed.
+
+I also learned about the function `system("CLS")` while writing the main function. I did not want to have several game boards cluttering the console, and such I looked for a way to clear the screen every time a card was changed. Although this function was never covered in any programming class here, it fit the role perfectly, and as such I used it frequently in the program.
