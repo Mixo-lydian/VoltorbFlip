@@ -11,7 +11,7 @@ using std::srand;
 using std::endl;
 using std::setw;
 using std::string;
-using std::for_each();
+using std::for_each;
 
 int WIDTH = 7;
 
@@ -103,7 +103,7 @@ void GameBoard::print() {
 		cout << endl << "==||=====||=====||=====||=====||=====||=====||" << endl;
 	}
 	cout << " ";
-	for_each(columnSums.begin(), columnSums.end(), []() { Indicator::print(WIDTH - 2); });
+	for_each(columnSums.begin(), columnSums.end(), [](Indicator x) { x.print(WIDTH - 2); });
 	cout << endl << endl;
 }
 
