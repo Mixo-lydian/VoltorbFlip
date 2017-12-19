@@ -30,37 +30,37 @@ Card::Card(int level = 1) {
 		break;
 	case 2:
 		if (rng < 25) value = 0; // 25%
-		else if (rng < 60 && rng >= 25) value = 1; // 35%
-		else if (rng < 85 && rng >= 60) value = 2; // 25%
-		else if (rng < 100 && rng >= 85) value = 3; // 15%
+		else if (rng < 70 && rng >= 25) value = 1; // 45%
+		else if (rng < 90 && rng >= 70) value = 2; // 20%
+		else if (rng < 100 && rng >= 90) value = 3; // 10%
 		else throw;
 		break;
 	case 3:
 		if (rng < 25) value = 0; // 25%
-		else if (rng < 55 && rng >= 25) value = 1; // 30%
-		else if (rng < 80 && rng >= 55) value = 2; // 25%
-		else if (rng < 100 && rng >= 80) value = 3; // 20%
+		else if (rng < 65 && rng >= 25) value = 1; // 40%
+		else if (rng < 85 && rng >= 65) value = 2; // 20%
+		else if (rng < 100 && rng >= 85) value = 3; // 15%
 		else throw;
 		break;
 	case 4:
 		if (rng < 20) value = 0; // 20%
-		else if (rng < 50 && rng >= 20) value = 1; // 30%
-		else if (rng < 80 && rng >= 50) value = 2; // 30%
-		else if (rng < 100 && rng >= 80) value = 3; // 20%
+		else if (rng < 60 && rng >= 20) value = 1; // 40%
+		else if (rng < 85 && rng >= 60) value = 2; // 25%
+		else if (rng < 100 && rng >= 85) value = 3; // 15%
 		else throw;
 		break;
 	case 5:
 		if (rng < 20) value = 0; // 20%
-		else if (rng < 45 && rng >= 20) value = 1; // 25%
-		else if (rng < 80 && rng >= 45) value = 2; // 35%
-		else if (rng < 100 && rng >= 80) value = 3; // 20%
+		else if (rng < 50 && rng >= 20) value = 1; // 30%
+		else if (rng < 85 && rng >= 50) value = 2; // 35%
+		else if (rng < 100 && rng >= 85) value = 3; // 15%
 		else throw;
 		break;
 	case 6:
 		if (rng < 20) value = 0; // 20%
-		else if (rng < 40 && rng >= 20) value = 1; // 20%
-		else if (rng < 75 && rng >= 40) value = 2; // 35%
-		else if (rng < 100 && rng >= 75) value = 3; // 25%
+		else if (rng < 45 && rng >= 20) value = 1; // 25%
+		else if (rng < 80 && rng >= 45) value = 2; // 35%
+		else if (rng < 100 && rng >= 80) value = 3; // 20%
 		else throw;
 		break;
 	case 7:
