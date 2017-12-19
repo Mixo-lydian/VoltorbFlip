@@ -74,6 +74,6 @@ The game's full functionality is now present. The inputs are all controlled by t
 
 To do this, I changed the default constructor for `Card` to be able to take an integer argument. This integer represents the current level of the game, and the rates for 0-3 will change based on this level. Once again, I use the `switch` statement for cases 1 through 7 to provide this functionality.
 
-The `GameBoard` default constructor is now able to take an integer argument as well: `playerLevel`, which is used to construct all of the cards in the 2D array.
+The `GameBoard` default constructor is now able to take an integer argument as well: `playerLevel`, which is used to construct all of the cards in the 2D array. Due to the leveling system, it may often be the case that the board is generated with 0 mines (which is basically free coins), or 25 unneeded flips (which is a free level-up). To counteract this, I've added a check to the game such that if a board is generated that matches either of these criteria, the constructor will generate another board.
 
 I have also decided that I may not port this project to Qt.
