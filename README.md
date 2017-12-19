@@ -70,6 +70,10 @@ and the intended functionality was still there.
 
 ---
 
-The game's full functionality is now present. The inputs are all controlled by the console, and the user can now play through the game without any problems. However, a problem arises where the number of coins that the player can initially get can skyrocket to huge values (exceeding 10,000), even in the first round. To remedy this and provide incentive to keep playing, I'm introducing a level system, where higher-leveled boards produce more 2's and 3's than lower-leveled ones, capping at 7.
+The game's full functionality is now present. The inputs are all controlled by the console, and the user can now play through the game without any problems. However, a problem arises where the number of coins that the player can initially get can skyrocket to huge values (exceeding 10,000), even in the first round. To remedy this and provide incentive to keep playing, I'm introducing a level system, where higher-leveled boards produce more 2's and 3's than lower-leveled ones, capping at level 7.
 
 To do this, I changed the default constructor for `Card` to be able to take an integer argument. This integer represents the current level of the game, and the rates for 0-3 will change based on this level. Once again, I use the `switch` statement for cases 1 through 7 to provide this functionality.
+
+The `GameBoard` default constructor is now able to take an integer argument as well: `playerLevel`, which is used to construct all of the cards in the 2D array.
+
+I have also decided that I may not port this project to Qt.
