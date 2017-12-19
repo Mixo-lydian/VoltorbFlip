@@ -4,12 +4,14 @@
 #include <iostream>
 #include <iomanip>
 #include <cassert>
+#include <algorithm>
 
 using std::cout;
 using std::srand;
 using std::endl;
 using std::setw;
 using std::string;
+using std::for_each;
 
 int WIDTH = 7;
 
@@ -101,9 +103,7 @@ void GameBoard::print() {
 		cout << endl << "==||=====||=====||=====||=====||=====||=====||" << endl;
 	}
 	cout << " ";
-	for (int i = 0; i < 5; i++) {
-		columnSums[i].print(WIDTH - 2);
-	}
+	for_each(columnSums.begin(), columnSums.end(), [](Indicator x) { x.print(WIDTH - 2); });
 	cout << endl << endl;
 }
 
