@@ -150,7 +150,12 @@ GameBoard::GameBoard(int playerLevel = 1) {
 }
 
 void GameBoard::print() {
-	cout << unneededFlips << " " << flippedCards << " " << playerLevel << endl << "==||=====||=====||=====||=====||=====||=====||" << endl;
+	// Debugging to show # of unneeded flips and flipped cards
+	// cout << unneededFlips << " " << flippedCards << " " << playerLevel << endl;
+
+	cout << "===== VOLTORB FLIP =====" << endl;
+	cout << "Your level: " << playerLevel << endl << endl;
+	cout << "==||=====||=====||=====||=====||=====||=====||" << endl;
 	for (int i = 0; i < 5; i++) {
 		int j = 0;
 		while (j < 6) {
