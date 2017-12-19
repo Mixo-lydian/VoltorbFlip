@@ -15,10 +15,62 @@ using std::for_each;
 
 int WIDTH = 7;
 
-Card::Card() {
-	value = rand() % 4;
+Card::Card(int level = 1) {
+	if (level > 7) level = 7;
 	flipped = false;
 	flagged = false;
+	int rng = rand() % 100;
+	switch (level) {
+	case 1:
+		if (rng < 25) value = 0; // 25%
+		else if (rng < 80 && rng >= 25) value = 1; // 55%
+		else if (rng < 95 && rng >= 80) value = 2; // 15%
+		else if (rng < 100 && rng >= 95) value = 3; // 5%
+		else throw;
+		break;
+	case 2:
+		if (rng < 25) value = 0; // 25%
+		else if (rng < 60 && rng >= 25) value = 1; // 35%
+		else if (rng < 85 && rng >= 60) value = 2; // 25%
+		else if (rng < 100 && rng >= 85) value = 3; // 15%
+		else throw;
+		break;
+	case 3:
+		if (rng < 25) value = 0; // 25%
+		else if (rng < 55 && rng >= 25) value = 1; // 30%
+		else if (rng < 80 && rng >= 55) value = 2; // 25%
+		else if (rng < 100 && rng >= 80) value = 3; // 20%
+		else throw;
+		break;
+	case 4:
+		if (rng < 20) value = 0; // 20%
+		else if (rng < 50 && rng >= 20) value = 1; // 30%
+		else if (rng < 80 && rng >= 50) value = 2; // 30%
+		else if (rng < 100 && rng >= 80) value = 3; // 20%
+		else throw;
+		break;
+	case 5:
+		if (rng < 20) value = 0; // 20%
+		else if (rng < 45 && rng >= 20) value = 1; // 25%
+		else if (rng < 80 && rng >= 45) value = 2; // 35%
+		else if (rng < 100 && rng >= 80) value = 3; // 20%
+		else throw;
+		break;
+	case 6:
+		if (rng < 20) value = 0; // 20%
+		else if (rng < 40 && rng >= 20) value = 1; // 20%
+		else if (rng < 75 && rng >= 40) value = 2; // 35%
+		else if (rng < 100 && rng >= 75) value = 3; // 25%
+		else throw;
+		break;
+	case 7:
+		if (rng < 20) value = 0; // 20%
+		else if (rng < 35 && rng >= 20) value = 1; // 15%
+		else if (rng < 75 && rng >= 35) value = 2; // 40%
+		else if (rng < 100 && rng >= 75) value = 3; // 25%
+		else throw;
+		break;
+	}
 }
 
 void Card::print(int width = WIDTH) {
@@ -50,47 +102,55 @@ void Indicator::print(int width = WIDTH) {
 	cout << setw(width) << value << "/" << voltorbs;
 }
 
-GameBoard::GameBoard() {
-	unneededFlips = 0;
+GameBoard::GameBoard(int playerLevel = 1) {
+	this->playerLevel = playerLevel;
 	flippedCards = 0;
 	victory = false;
+	bool regenerateCheck = true;
 
-	for (int i = 0; i < 5; i++) {
-		for (int j = 0; j < 5; j++) {
-			Card c;
-			board[i][j] = c;
-		}
-	}
-
-	// Row indicator
-	for (int i = 0; i < 5; i++) {
-		int sum = 0;
-		int counter = 0;
-		for (int j = 0; j < 5; j++) {
-			if (board[i][j].get_value() == 0) {
-				counter++;
-				unneededFlips++;
+	while (regenerateCheck) {
+		unneededFlips = 0;
+		int voltorbs = 0;
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				Card c(playerLevel);
+				board[i][j] = c;
 			}
-			else if (board[i][j].get_value() == 1) unneededFlips++;
-			sum += board[i][j].get_value();
 		}
-		rowSums.push_back(Indicator(sum, counter));
-	}
 
-	// Column indicator
-	for (int i = 0; i < 5; i++) {
-		int sum = 0;
-		int counter = 0;
-		for (int j = 0; j < 5; j++) {
-			if (board[j][i].get_value() == 0) counter++;
-			sum += board[j][i].get_value();
+		// Row indicator
+		for (int i = 0; i < 5; i++) {
+			int sum = 0;
+			int counter = 0;
+			for (int j = 0; j < 5; j++) {
+				if (board[i][j].get_value() == 0) {
+					counter++;
+					voltorbs++;
+					unneededFlips++;
+				}
+				else if (board[i][j].get_value() == 1) unneededFlips++;
+				sum += board[i][j].get_value();
+			}
+			rowSums.push_back(Indicator(sum, counter));
 		}
-		columnSums.push_back(Indicator(sum, counter));
+
+		// Column indicator
+		for (int i = 0; i < 5; i++) {
+			int sum = 0;
+			int counter = 0;
+			for (int j = 0; j < 5; j++) {
+				if (board[j][i].get_value() == 0) counter++;
+				sum += board[j][i].get_value();
+			}
+			columnSums.push_back(Indicator(sum, counter));
+		}
+
+		if (unneededFlips != 25 && voltorbs != 0) regenerateCheck = false;
 	}
 }
 
 void GameBoard::print() {
-	cout << unneededFlips << " " << flippedCards << endl << "==||=====||=====||=====||=====||=====||=====||" << endl;
+	cout << unneededFlips << " " << flippedCards << " " << playerLevel << endl << "==||=====||=====||=====||=====||=====||=====||" << endl;
 	for (int i = 0; i < 5; i++) {
 		int j = 0;
 		while (j < 6) {

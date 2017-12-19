@@ -51,6 +51,7 @@ void playGame(GameBoard &g, Player &p) {
 			if (g.check_victory()) {
 				cout << "You have won the game!" << endl;
 				keepPlaying = false;
+				p.level_up();
 			}
 		}
 	}
@@ -64,13 +65,12 @@ int main() {
 	bool repeat = true;
 	int repeatCheck = 0;
 	while (repeat) {
-		GameBoard g;
+		GameBoard g(p.get_level());
 		playGame(g, p);
 		cout << "Would you like to play again? (0- = Yes, 1+ = No): ";
 		cin >> repeatCheck;
 		if (repeatCheck >= 1) repeat = false;
 		else system("CLS");
-		p.level_up();
 	}
 
 	cout << "Final total: " << p.get_coins() << endl;

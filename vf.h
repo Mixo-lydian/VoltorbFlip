@@ -15,7 +15,7 @@ public:
 
 class Card : public Tile {
 public:
-	Card();
+	Card(int level);
 	void print(int width);
 	int get_value() const;
 	bool get_flipped() const;
@@ -39,7 +39,7 @@ private:
 
 class GameBoard {
 public:
-	GameBoard();
+	GameBoard(int playerLevel);
 	Card board[5][5];
 	void print();
 	int interact(int row, int column, int type);
@@ -49,6 +49,7 @@ private:
 	vector<Indicator> columnSums;
 	int unneededFlips;
 	int flippedCards;
+	int playerLevel;
 	bool victory;
 };
 
