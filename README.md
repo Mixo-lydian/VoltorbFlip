@@ -35,7 +35,9 @@ The first commit contains very rudimentary versions of these classes. The `GameB
 In the next commit, I made several changes.
 * I added a `flagged` field to the `Card` class, which allows the flagging functionality from the original game. Players can now flag cards that they suspect are mines (they will print "F" when flagged), and remind themselves to avoid them.
 * However, the `GameBoard` is still unable to change `Card` or `Indicator` values, since the relevant values are all private. This is where I reviewed a concept from 10B that was touched on in 10C: the `friend` keyword. Declaring a `friend class X` in the private section of a class allows the class X to access its private members directly. I made both `Card` and `Indicator` have `friend class GameBoard`, which opens the doors for the game to finally function.
-* `GameBoard` gains a new member function: `interact(int row, int column, int type = 0)`. The first two fields are self-explanatory: The function takes in a row and column, and interacts with the element that corresponds to both. `type` is a field that tells the function whether the user wants to flip just one card (0), an entire row (1), or an entire column (2), or if they want to flag an element (3), and performs the corresponding action.
+* `GameBoard` gains a new member function: `interact(int row, int column, int type = 0)`.
+  * The first two fields are self-explanatory: The function takes in a row and column, and interacts with the element that corresponds to both. `type` is a field that tells the function whether the user wants to flip just one card (0), an entire row (1), or an entire column (2), or if they want to flag an element (3), and performs the corresponding action.
+  * To differentiate between the types of interactions, rather than using several `if-else` statements, I used the `switch` statement. This is something I remember learning from 10A, but after it was reviewed in 10C I felt confident enough to actually use it in the program. I broke down the options into different cases and had the function take the appropriate action based on what integer was passed into the `type` field.
 * To the `GameBoard` class, I added three values: `int unneededFlips`, `int flippedCards`, and `bool victory`. These are crucial for the game to function.
   * Since the scoring in Voltorb Flip is based on multiplication, you don't actually need to flip over any `Card`s with value 1 to win. If you have a nonzero score, it'll be multiplied by the value on the card, which means that flipping over a 1 actually doesn't do anything unless it's the first card you flip (and even then, you would still need to flip over all the 2's and 3's to win anyway).
   * The default constructor for `GameBoard` thus goes through the 2D array and notes all of the 0's and 1's, and assigns this value to `unneededFlips`.
@@ -65,3 +67,13 @@ for_each(columnSums.begin(), columnSums.end(), [](Indicator x) { x.print(WIDTH -
 ```
 
 and the intended functionality was still there.
+
+---
+
+The game's full functionality is now present. The inputs are all controlled by the console, and the user can now play through the game without any problems. However, a problem arises where the number of coins that the player can initially get can skyrocket to huge values (exceeding 10,000), even in the first round. To remedy this and provide incentive to keep playing, I'm introducing a level system, where higher-leveled boards produce more 2's and 3's than lower-leveled ones, capping at level 7.
+
+To do this, I changed the default constructor for `Card` to be able to take an integer argument. This integer represents the current level of the game, and the rates for 0-3 will change based on this level. Once again, I use the `switch` statement for cases 1 through 7 to provide this functionality.
+
+The `GameBoard` default constructor is now able to take an integer argument as well: `playerLevel`, which is used to construct all of the cards in the 2D array.
+
+I have also decided that I may not port this project to Qt.
