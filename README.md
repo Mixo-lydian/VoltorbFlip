@@ -55,3 +55,13 @@ for (int i = 0; i < 5; i++) {
 and the same was done for columns, and the problem was fixed.
 
 I also learned about the function `system("CLS")` while writing the main function. I did not want to have several game boards cluttering the console, and such I looked for a way to clear the screen every time a card was changed. Although this function was never covered in any programming class here, it fit the role perfectly, and as such I used it frequently in the program.
+
+---
+
+After learning about lambda functions and the `for_each` function, I wanted to implement one into my project to possibly cut down on the number of explicit `for` loops I had to write. However, I found that in most cases, this was not very useful. Most of my `for` loops were nested, and manipulated array values instead of values in a defined container class, which means that I couldn't use `for_each`. However, I found one instance where I could use this: the printing of `vector<Indicator> columnSums`. I replaced the loop (which printed the current value at the specified `WIDTH - 2`) with this line of code:
+
+```
+for_each(columnSums.begin(), columnSums.end(), [](Indicator x) { x.print(WIDTH - 2); });
+```
+
+and the intended functionality was still there.
